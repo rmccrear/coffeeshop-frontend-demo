@@ -1,3 +1,3 @@
 export default function Home() {
-  return <h1>Coffee Shop Frontend Splash Page</h1>;
+  return <h1> Robert's Coffee Shop Frontend Splash Page</h1>;
 }
