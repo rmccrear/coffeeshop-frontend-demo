@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import Button from "./Button";
 
 
-export default function ProductCard({ product, onAddToCart }) {
+export default function ProductCard({ product, addToCart }) {
   // const { product, onAddToCart } = props;
   // const product = props.product;
   // const onAddToCart = props.onAddToCart;
@@ -16,7 +16,7 @@ export default function ProductCard({ product, onAddToCart }) {
         <p>{product.description}</p>
         <p>${product.price}</p>
         <div className="card-actions justify-end">
-          <Button label="Add to Cart" handleClick={onAddToCart} ></Button>
+          <Button label="Add to Cart" handleClick={addToCart} ></Button>
         </div>
       </div>
     </div>
@@ -25,5 +25,5 @@ export default function ProductCard({ product, onAddToCart }) {
 
 ProductCard.propTypes = {
   product: PropTypes.object.isRequired,
-  onAddToCart: PropTypes.func.isRequired,
+  addToCart: PropTypes.func.isRequired,
 };
