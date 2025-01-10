@@ -8,7 +8,7 @@ export default meta;
 
 export const Default = {
   args: {
-    label: "Buy Now!!!!!!!"
+    label: "Buy Now"
   }
 };
 
@@ -21,5 +21,11 @@ export const BuyLater = {
 export const BuyTwo = {
   args: {
     label: "Buy Two!!"
+  }
+};
+
+export const Login = {
+  args: {
+    label: "Login"
   }
 };
