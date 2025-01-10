@@ -7,7 +7,7 @@ export default {
   ],
   plugins: [require("daisyui")],
   daisyui: {
-    themes: ['coffee', 'night']
+    themes: ['coffee']
   },
   darkMode: ['selector', '[data-theme="night"]']
 };

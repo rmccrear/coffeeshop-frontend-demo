@@ -21,7 +21,7 @@ export default function ProductPage() {
       <h1>Product Page for product &#35; {id}</h1>
       <ProductCard 
           product={product}
-          onAddToCart={addToCart}
+          addToCart={addToCart}
       />
       <Footer content="Coffee is great" />
     </div>

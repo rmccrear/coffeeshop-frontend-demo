@@ -1,8 +1,8 @@
 // components/Button.js
 import PropTypes from 'prop-types';
-export default function Button({ label, handleClick }) {
+export default function Button({ label, handleClick, variant="primary" }) {
   return (
-  <button className="btn btn-primary" onClick={handleClick}>
+  <button className={`btn btn-${variant}`} onClick={handleClick}>
     {label}
   </button>
   );

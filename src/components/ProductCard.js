@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import Button from "./Button";
 
 
-export default function ProductCard({ product, addToCart }) {
+export default function ProductCard({ product, addToCart, buttonLabel="Add to Cart", buttonVariant }) {
   // const { product, onAddToCart } = props;
   // const product = props.product;
   // const onAddToCart = props.onAddToCart;
@@ -16,7 +16,7 @@ export default function ProductCard({ product, addToCart }) {
         <p>{product.description}</p>
         <p>${product.price}</p>
         <div className="card-actions justify-end">
-          <Button label="Add to Cart" handleClick={addToCart} ></Button>
+          <Button label={buttonLabel} handleClick={addToCart} variant={buttonVariant}  ></Button>
         </div>
       </div>
     </div>
