@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import Button from "./Button";
 
 
@@ -29,4 +30,8 @@ export default function CheckoutForm({ handleCheckout }) {
       <Button label="Submit" />
 
     </form>);
+};
+
+CheckoutForm.propTypes = {
+  handleCheckout: PropTypes.func.isRequired,
 };

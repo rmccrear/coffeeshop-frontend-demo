@@ -20,7 +20,8 @@ export const BuyLater = {
 
 export const BuyTwo = {
   args: {
-    label: "Buy Two!!"
+    label: "Buy Two!!",
+    handleClick: () => alert('You bought two!')
   }
 };
 

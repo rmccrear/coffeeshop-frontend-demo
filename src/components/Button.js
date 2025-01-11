@@ -9,4 +9,6 @@ export default function Button({ label, handleClick, variant="primary" }) {
 }
 Button.propTypes = {
   label: PropTypes.string.isRequired,
+  handleClick: PropTypes.func.isRequired,
+  variant: PropTypes.string,
 };

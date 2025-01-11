@@ -8,6 +8,7 @@ import cart from "@/mocks/cart.json";
 
 export default function Cart() {
   const cartContents = cart.products;
+  console.log(cartContents)
 
   const cartJSX = cartContents.map((product) => {
     // Use key prop every time you use map.
