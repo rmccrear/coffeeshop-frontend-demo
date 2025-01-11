@@ -5,8 +5,9 @@ import CheckoutForm from '@/components/CheckoutForm';
 
 export default function CheckoutPage() {
 
-  function handleCheckout(event) {
-    alert('Checkout clicked!');
+  function handleCheckout(name, address, phone) {
+    alert('Checkout clicked! Thank you ' + name);
+    // TODO: send to server...
   }
 
   return (
