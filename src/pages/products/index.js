@@ -1,32 +1,53 @@
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Loading from '@/components/Loading';
 
 import ProductCard from '@/components/ProductCard';
 import productData from '@/mocks/products.json';
-import { 
-    loadCartFromLocalStorage,
-    saveCartToLocalStorage } from '@/utils';
+import {
+  loadCartFromLocalStorage,
+  saveCartToLocalStorage
+} from '@/utils';
+
 
 
 export default function ProductsPage() {
+  const router = useRouter();
+  const { category } = router.query;
   const [products, setProducts] = useState([]);
   const [cartContents, setCartContents] = useState([]);
 
-  useEffect(() => {
+  console.log(category);
 
+  useEffect(() => {
     // Load cart from local storage
     const cartData = loadCartFromLocalStorage(); // get data from outside the component
     setCartContents(cartData); // set data inside the component
-
+    //TODO: get Product Data from server
     setProducts(productData);
   }, []);
+
+  useEffect(() => {
+    if (category) {
+      console.log(category)
+      // TODO: fetch more from server first.
+      const filteredProductData = productData.filter(product => {
+        console.log(product.category);
+        return product.category === category;
+      });
+      setProducts(filteredProductData);
+    } else {
+      setProducts(productData);
+    }
+  }, [category]);
 
   function addProductToCart(product) {
     // just like...
     // cartContents.push(product);
-    const newCartContents = [ ...cartContents, product ];
+    const newCartContents = [...cartContents, product];
     setCartContents(newCartContents);
 
     saveCartToLocalStorage(newCartContents);
@@ -38,7 +59,7 @@ export default function ProductsPage() {
     // so we need to give it help by providing a unique key prop.
     function addToCart() {
       alert("clicked add to cart " + product.name);
-      addProductToCart( product );
+      addProductToCart(product);
     }
     return (<ProductCard
       key={product._id}
