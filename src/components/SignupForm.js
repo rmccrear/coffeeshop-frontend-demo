@@ -46,10 +46,32 @@ export default function SignupForm({ buttonLabel, handleSignup }) {
     }
   }
 
+  const [emailValue, setEmailValue] = useState("");
+  const [emailIsValid, setEmailIsValid] = useState(false);
+
+  function onEmailChange(event) {
+    const newEmailValue = event.target.value;
+    if(newEmailValue.includes("@")) {
+      setEmailIsValid(true);
+    } else {
+      setEmailIsValid(false);
+    }
+    setEmailValue(event.target.value);
+  }
+
   return (
     <form className="flex flex-col" onSubmit={handleSubmit}>
       <input type="text" placeholder="Name" name="fullName" />
-      <input type="email" placeholder="Email" name="email" />
+      <input 
+        type="email"
+        placeholder="Email"
+        name="email" 
+        onChange={onEmailChange}
+        value={emailValue}
+      />
+      <div className={ emailIsValid ? "invisible text-xs" : "text-xs text-red-400 " }>
+        Supply a valid email address.
+      </div>
       <input
         type="password"
         placeholder="Password"
