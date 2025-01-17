@@ -14,33 +14,66 @@ import {
 
 
 
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
+
 export default function ProductsPage() {
   const router = useRouter();
   const { category } = router.query;
+
   const [products, setProducts] = useState([]);
+  const [productFetchError, setProductFetchError] = useState(false);
+  const [productsLoading, setProductsLoading] = useState(true);
+
+
   const [cartContents, setCartContents] = useState([]);
 
   console.log(category);
+
+  async function fetchProducts() {
+    const url = `${BACKEND_URL}/products`;
+    try {
+      setProductsLoading(true);
+      const response = await fetch(url);
+      if (!response.ok) {
+        console.log("fetch failed with " + response.status);
+        setProductFetchError(true);
+      }
+      else {
+        const productData = await response.json();
+        setProducts(productData);
+      }
+    } catch (error) {
+      console.log(error);
+      setProductFetchError(true);
+    } finally {
+      setProductsLoading(false);
+    }
+  }
 
   useEffect(() => {
     // Load cart from local storage
     const cartData = loadCartFromLocalStorage(); // get data from outside the component
     setCartContents(cartData); // set data inside the component
     //TODO: get Product Data from server
-    setProducts(productData);
+    fetchProducts();
   }, []);
+
+  async function fetchFilteredProducts(category) {
+    const url = `${BACKEND_URL}/products?category=${category}`;
+    setProductsLoading(true);
+    const result = await fetch(url);
+    const productData = await result.json();
+    setProductsLoading(false);
+    setProducts(productData);
+  }
 
   useEffect(() => {
     if (category) {
       console.log(category)
-      // TODO: fetch more from server first.
-      const filteredProductData = productData.filter(product => {
-        console.log(product.category);
-        return product.category === category;
-      });
-      setProducts(filteredProductData);
+      fetchFilteredProducts(category);
+
     } else {
-      setProducts(productData);
+      fetchProducts();
     }
   }, [category]);
 
@@ -70,12 +103,26 @@ export default function ProductsPage() {
   return (
     <div>
       <Navbar />
-      <div className="grid grid-rows-3 grid-flow-col">
-        <Loading isLoading={false} />
-        {
-          productsJSX
-        }
-      </div>
+      {
+        productFetchError ? (
+          <div className="text-red-400 text-lg">
+            Error fetching products.
+          </div>
+        ) : ""
+      }
+      {
+        productsLoading ? (
+          <div className="flex justify-center">
+            <span className="loading loading-dots loading-lg"></span>
+          </div>
+        ) : (
+          <div className="grid grid-rows-3 grid-flow-col">
+            {
+              productsJSX
+            }
+          </div>
+        )
+      }
       <Footer />
     </div>
   );
