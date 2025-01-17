@@ -6,56 +6,32 @@ import Footer from "@/components/Footer";
 import Loading from '@/components/Loading';
 
 import ProductCard from '@/components/ProductCard';
-import productData from '@/mocks/products.json';
 import {
   loadCartFromLocalStorage,
   saveCartToLocalStorage
 } from '@/utils';
-
-
+import { useFetch } from '@/hooks/api';
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 export default function ProductsPage() {
   const router = useRouter();
   const { category } = router.query;
-
-  const [products, setProducts] = useState([]);
-  const [productFetchError, setProductFetchError] = useState(false);
-  const [productsLoading, setProductsLoading] = useState(true);
-
+  console.log(category);
 
   const [cartContents, setCartContents] = useState([]);
 
-  console.log(category);
 
-  async function fetchProducts() {
-    const url = `${BACKEND_URL}/products`;
-    try {
-      setProductsLoading(true);
-      const response = await fetch(url);
-      if (!response.ok) {
-        console.log("fetch failed with " + response.status);
-        setProductFetchError(true);
-      }
-      else {
-        const productData = await response.json();
-        setProducts(productData);
-      }
-    } catch (error) {
-      console.log(error);
-      setProductFetchError(true);
-    } finally {
-      setProductsLoading(false);
-    }
-  }
+  const url = `${BACKEND_URL}/products`;
+  const [productFetchError, productsLoading, products] = useFetch(url, []);
+
+  // We need productFetchError, productsLoading, products
 
   useEffect(() => {
     // Load cart from local storage
     const cartData = loadCartFromLocalStorage(); // get data from outside the component
     setCartContents(cartData); // set data inside the component
-    //TODO: get Product Data from server
-    fetchProducts();
+
   }, []);
 
   async function fetchFilteredProducts(category) {
@@ -71,9 +47,6 @@ export default function ProductsPage() {
     if (category) {
       console.log(category)
       fetchFilteredProducts(category);
-
-    } else {
-      fetchProducts();
     }
   }, [category]);
 
@@ -116,7 +89,7 @@ export default function ProductsPage() {
             <span className="loading loading-dots loading-lg"></span>
           </div>
         ) : (
-          <div className="grid grid-rows-3 grid-flow-col">
+          <div className="flex flex-wrap">
             {
               productsJSX
             }
