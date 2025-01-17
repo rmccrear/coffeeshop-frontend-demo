@@ -3,9 +3,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ProductCard from '@/components/ProductCard';
 import { useRouter } from 'next/router';
-
-
-import products from '../../mocks/products.json';
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 export default function ProductPage() {
   const router = useRouter();
@@ -15,12 +13,12 @@ export default function ProductPage() {
 
   async function fetchProduct(id) {
     console.log("fetching the product");
-    const result = await fetch("https://coffee-shop-backend-5fmn.onrender.com/api/v1/products/67886f4cbe506d91093fa91c");
+    const result = await fetch(`${BACKEND_URL}/products/${id}`);
     const product = await result.json();
     setProduct(product);
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     console.log("hello from use effect with [id] " + id)
     fetchProduct(id);
   }, [id]);
@@ -34,9 +32,9 @@ export default function ProductPage() {
     <div className="container mx-auto px-4" >
       <Navbar />
       <h1>Product Page for product &#35; {id}</h1>
-      <ProductCard 
-          product={product}
-          addToCart={addToCart}
+      <ProductCard
+        product={product}
+        addToCart={addToCart}
       />
       <Footer content="Coffee is great" />
     </div>
