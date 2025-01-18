@@ -22,7 +22,8 @@ export default function ProductsPage() {
   const [cartContents, setCartContents] = useState([]);
 
 
-  const url = `${BACKEND_URL}/products`;
+  // const url = `${BACKEND_URL}/products`;
+  const [url, setUrl] = useState(`${BACKEND_URL}/products`);
   const [productFetchError, productsLoading, products] = useFetch(url, []);
 
   // We need productFetchError, productsLoading, products
@@ -34,21 +35,21 @@ export default function ProductsPage() {
 
   }, []);
 
-  async function fetchFilteredProducts(category) {
-    const url = `${BACKEND_URL}/products?category=${category}`;
-    setProductsLoading(true);
-    const result = await fetch(url);
-    const productData = await result.json();
-    setProductsLoading(false);
-    setProducts(productData);
-  }
+  // async function fetchFilteredProducts(category) {
+  //   const url = `${BACKEND_URL}/products?category=${category}`;
+  //   setProductsLoading(true);
+  //   const result = await fetch(url);
+  //   const productData = await result.json();
+  //   setProductsLoading(false);
+  //   setProducts(productData);
+  // }
 
-  useEffect(() => {
-    if (category) {
-      console.log(category)
-      fetchFilteredProducts(category);
-    }
-  }, [category]);
+  // useEffect(() => {
+  //   if (category) {
+  //     console.log(category)
+  //     fetchFilteredProducts(category);
+  //   }
+  // }, [category]);
 
   function addProductToCart(product) {
     // just like...
@@ -83,6 +84,17 @@ export default function ProductsPage() {
           </div>
         ) : ""
       }
+      <div className="flex justify-evenly">
+        <span onClick={() => setUrl(`${BACKEND_URL}/products?category=beverages`)}>
+          Beverages
+        </span>
+        <span onClick={() => setUrl(`${BACKEND_URL}/products?category=merchandise`)}>
+          Merchandise
+        </span>
+        <span onClick={() => setUrl(`${BACKEND_URL}/products?category=books`)}>
+          Books
+        </span>
+      </div>
       {
         productsLoading ? (
           <div className="flex justify-center">
