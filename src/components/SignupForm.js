@@ -34,7 +34,7 @@ export default function SignupForm({ buttonLabel, handleSignup }) {
   function handleSubmit(e) {
     e.preventDefault();
     const user = {
-      fullName: e.target.elements.fullName.value,
+      name: e.target.elements.fullName.value,
       email: e.target.elements.email.value,
       password: e.target.elements.password.value,
     }
