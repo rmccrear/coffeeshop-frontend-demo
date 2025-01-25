@@ -39,13 +39,14 @@ export default function CreateProductPage() {
     // const {name, description, price, stock} = product;
     console.table(product);
     // TODO: fetch with POST to create product
+
     try {
-      const response = await fetch("https://coffee-shop-backend-5fmn.onrender.com/api/v1/products", {
+      const response = await fetch("https://coffee-shop-backend-5fmn.onrender.com/api/v2/products", {
         method: "POST",
         body: JSON.stringify(product),
         headers: {
           "Content-type": "application/json; charset=UTF-8",
-          "...": "..." // ???? 
+          "Authorization": `Bearer ${token}`
         }
       })
       const data = await response.json();
@@ -85,3 +86,11 @@ export default function CreateProductPage() {
     </>
   );
 }
+
+
+// const formData = new FormData();
+// formData.append("name", product.name);
+// formData.append("description", product.description);
+// formData.append("category", product.category);
+// formData.append("price", 0+product.price);
+// console.log(formData);
