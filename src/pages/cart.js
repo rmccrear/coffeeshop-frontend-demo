@@ -21,16 +21,22 @@ export default function Cart() {
     setCartContents(cartData);
   }, []);
 
-  const cartJSX = cartContents.map((product) => {
+  const cartJSX = cartContents.map((product, idx) => {
     // Use key prop every time you use map.
     // This is a unique identifier for each product.
     // React is not smart enough to keep track of the order of items in a list.
     // so we need to give it help by providing a unique key prop.
     function removeFromCart() {
-      alert("clicked remove from cart " + product.name);
+      const newCartContents = cartContents.filter(p => {
+        return p._id !== product._id;
+      })
+      console.log(newCartContents);
+      // cartContents = newCartContents; // NO! 
+      setCartContents(newCartContents);
+      saveCartToLocalStorage(newCartContents);
     }
     return (<CartItem
-              key={product._id}
+              key={"" + product._id + idx}
               product={product}
               removeFromCart={removeFromCart}
             />)
