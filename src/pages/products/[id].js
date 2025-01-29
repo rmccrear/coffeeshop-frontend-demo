@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ProductCard from '@/components/ProductCard';
@@ -13,21 +12,6 @@ export default function ProductPage() {
 
   const url = `${BACKEND_URL}/products/${id}`;
   const [hasError, isLoading, product] = useFetch(url, {});
-
-  // const product = products[id] || {};
-  // const [product, setProduct] = useState({});
-
-  // async function fetchProduct(id) {
-  //   console.log("fetching the product");
-  //   const result = await fetch(`${BACKEND_URL}/products/${id}`);
-  //   const product = await result.json();
-  //   setProduct(product);
-  // }
-
-  // useEffect(() => {
-  //   console.log("hello from use effect with [id] " + id)
-  //   fetchProduct(id);
-  // }, [id]);
 
   function addToCart() {
     alert("clicked add to cart " + product.name);
