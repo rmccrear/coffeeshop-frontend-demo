@@ -10,6 +10,7 @@ const btnClasses = {
 export default function Button({ label, handleClick, variant="primary" }) {
   return (
   <button 
+    type="submit"
     className={btnClasses[variant] ? btnClasses[variant] : 'btn btn-primary' }
     onClick={handleClick}
   >
