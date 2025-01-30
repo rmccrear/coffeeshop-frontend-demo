@@ -17,19 +17,23 @@ export default function Home() {
   return (
     <div>
 
-      <Navbar title="Home"></Navbar>
-
-      <div className="hero min-h-screen" style={{
-    backgroundImage: "url(/coffee-hero.jpg)",
-  }}>
-        <div className="hero-content text-center">
-          <h1>NO COFFEE COFFEE SHOP</h1>
-          <p> The best coffee this side of the Mississippi.</p>
-          <Button label="Sign up" handleClick={handleCtaClick}>
-          </Button>
+<Navbar title="Home"></Navbar>
+      <div
+        className="hero min-h-screen"
+        style={{
+          backgroundImage: "url(/coffee-hero.jpg)",
+        }}>
+        <div className="hero-overlay bg-opacity-60"></div>
+        <div className="hero-content text-neutral-content text-center">
+          <div className="max-w-md">
+            <h1 className="mb-5 text-5xl font-bold">NO COFFEE COFFEE SHOP</h1>
+            <p className="mb-5">
+              The best coffee in N.O.
+            </p>
+            <Button label="Sign up" handleClick={handleCtaClick} />
+          </div>
         </div>
       </div>
-
       <Footer content="© Robert"></Footer>
 
     </div>
