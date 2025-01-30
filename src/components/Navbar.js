@@ -2,7 +2,8 @@
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 
-import useAuth from '@/hooks/auth';
+// import useAuth from '@/hooks/auth';
+import { useAuth } from '@/context/AuthContext';
 export default function Navbar() {
 
   const { user } = useAuth();

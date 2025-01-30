@@ -1,5 +1,5 @@
-// import { useAuthFetch } from '@/hooks/api';
-import useAuth from "@/hooks/auth";
+// import useAuth from "@/hooks/auth";
+import { useAuth } from "@/context/AuthContext";
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";

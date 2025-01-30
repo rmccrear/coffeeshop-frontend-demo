@@ -5,7 +5,16 @@ export default function useAuth(){
   const [token, setToken] = useState();
   const [isAuthenticated, setIsAuthenticated] = useState( false );
 
+  function logout() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    setToken(null);
+    setUser(null);
+    setIsAuthenticated(false);
+  }
+
   useEffect(()=>{
+    console.log("Getting user and token from local storage");
     const t = localStorage.getItem("token");
     setToken(t);
     const u = localStorage.getItem("user");
@@ -18,5 +27,5 @@ export default function useAuth(){
     }
   }, []);
 
-  return { user, token, isAuthenticated }
+  return { user, token, isAuthenticated, logout }
 }
