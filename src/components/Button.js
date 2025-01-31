@@ -5,6 +5,7 @@ const btnClasses = {
   primary: "btn btn-primary",
   secondary: "btn btn-secondary",
   error: "btn btn-error",
+  link: "btn btn-link"
 }
 
 export default function Button({ label, handleClick, variant="primary" }) {
